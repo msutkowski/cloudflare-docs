@@ -51,11 +51,11 @@ To check whether a response comes from cache or not, **cf-aig-cache-status** wil
 
 In order to override the default cache behavior defined on the settings tab, you can, on a per-request basis, set headers for the following options:
 
-### Skip cache (cf-skip-cache)
+### Skip cache (cf-aig-skip-cache)
 
 Skip cache refers to bypassing the cache and fetching the request directly from the original provider, without utilizing any cached copy.
 
-You can use the header **cf-skip-cache** to bypass the cached version of the request.
+You can use the header **cf-aig-skip-cache** to bypass the cached version of the request.
 
 As an example, when submitting a request to OpenAI, include the header in the following manner:
 
@@ -63,7 +63,7 @@ As an example, when submitting a request to OpenAI, include the header in the fo
 curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/openai/chat/completions \
   --header 'Authorization: Bearer $TOKEN' \
   --header 'Content-Type: application/json' \
-  --header 'cf-skip-cache: true' \
+  --header 'cf-aig-skip-cache: true' \
   --data ' {
    		 "model": "gpt-4o-mini",
    		 "messages": [
@@ -76,9 +76,9 @@ curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/openai/chat/
 '
 ```
 
-### Cache TTL (cf-cache-ttl)
+### Cache TTL (cf-aig-cache-ttl)
 
-Cache TTL, or Time To Live, is the duration a cached request remains valid before it expires and requires refreshing from the original source. You can use **cf-cache-ttl** to set the desired caching duration in milliseconds.
+Cache TTL, or Time To Live, is the duration a cached request remains valid before it expires and requires refreshing from the original source. You can use **cf-cache-ttl** to set the desired caching duration in seconds. The minimum time to live is 60 seconds. 
 
 For example, if you set a TTL of one hour, it means that a request is kept in the cache for an hour. Within that hour, an identical request will be served from the cache instead of the original API. After an hour, the cache expires and the request will go to the original API for a more recent response, and that response will repopulate the cache for the next hour.
 
@@ -88,7 +88,7 @@ As an example, when submitting a request to OpenAI, include the header in the fo
 curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/openai/chat/completions \
   --header 'Authorization: Bearer $TOKEN' \
   --header 'Content-Type: application/json' \
-  --header 'cf-cache-ttl: 3600000' \
+  --header 'cf-aig-cache-ttl: 3600' \
   --data ' {
    		 "model": "gpt-4o-mini",
    		 "messages": [
