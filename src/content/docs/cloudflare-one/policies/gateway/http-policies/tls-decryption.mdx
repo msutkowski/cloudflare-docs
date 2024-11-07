@@ -19,6 +19,8 @@ When you enable TLS decryption, Gateway will decrypt all traffic sent over HTTPS
 
 Cloudflare prevents interference by decrypting, inspecting, and re-encrypting HTTPS requests in its data centers in memory only. Gateway only stores eligible cache content at rest. All cache disks are encrypted at rest. You can configure where TLS decryption takes place with [Regional Services](/data-localization/regional-services/) in the [Cloudflare Data Localization Suite (DLS)](/data-localization/).
 
+Gateway supports connections over TLS 1.1, 1.2, and 1.3.
+
 ## Enable TLS decryption
 
 <Render file="gateway/enable-tls-decryption" product="cloudflare-one" />
